@@ -5,6 +5,7 @@ function handleSubmit(event) {
     event.preventDefault()
     const elements = event.currentTarget.elements;
     // console.log(elements.email.value);
+
     // console.dir(event.currentTarget);
     const info = {
         email: elements.email.value.trim(),

@@ -7,36 +7,37 @@ const input = document.querySelector("input");
 const createBtn = document.querySelector("[data-create]");
 const destroyBtn = document.querySelector("[data-destroy]");
 const boxesContainer = document.querySelector("#boxes")
-let firstBoxes = 30;
 
+function createBoxes(amount) {
+    boxesContainer.innerHTML = "";
 
+    const elements = [];
+    let size = 30;
 
-createBtn.addEventListener("click", createMarkup);
-destroyBtn.addEventListener("click", () => {
-    input.value = ""
-    destroyBoxes();
-})
-function createMarkup(event) {
-    if (input.value < 1 || input.value > 100) {
-        return;
+    for (let i = 0; i < amount; i++) {
+        const box = document.createElement("div");
+        box.style.width = `${size}px`;
+        box.style.height = `${size}px`;
+        box.style.backgroundColor = getRandomHexColor();
+        box.style.marginBlock = "10px";
+        elements.push(box);
+        size += 10;
     }
-    createBoxes(input.value)
+    boxesContainer.append(...elements);
 }
+
 function destroyBoxes() {
     boxesContainer.innerHTML = "";
-    firstBoxes = 30;
-}
-function createBoxes(amaunt) {
-    destroyBoxes();
-    boxesContainer.innerHTML = "";
-    firstBoxes = 30;
 
-    for (let i = 0; i < amaunt; i++) {
-        const box = document.createElement("div");
-        box.style.width = `${firstBoxes}px`;
-        box.style.height = `${firstBoxes}px`;
-        box.style.backgroundColor = getRandomHexColor();
-        boxesContainer.append(box);
-        firstBoxes += 10;
-    }
 }
+createBtn.addEventListener("click", () => {
+    const amount = parseInt(input.value, 10)
+    if (amount >= 1 && amount <= 100) {
+        createBoxes(amount);
+        input.value = ""
+    }
+});
+destroyBtn.addEventListener("click", destroyBoxes)
+boxesContainer.style.display = "flex";
+boxesContainer.style.flexWrap = "wrap";
+boxesContainer.style.gap = "10px"

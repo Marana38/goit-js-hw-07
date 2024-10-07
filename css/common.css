@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
 }
 
 
@@ -71,6 +72,7 @@ body {
 .gallery {
     display: flex;
     flex-wrap: wrap;
+    list-style: none;
     gap: 24px;
     row-gap: 48px;
     justify-content: center;
